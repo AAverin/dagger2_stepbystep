@@ -11,14 +11,14 @@ import pro.averin.anton.dagger2.stepbystep.di.TestClassParent;
 
 public class MainActivity extends BaseActivity {
 
-    @Inject TestClassParent testClassParent;
+    TestClassParent testClassParent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         TestClassComponent testComponent = DaggerTestClassComponent.builder().build();
-        testComponent.injectTo(this);
+        testClassParent = new TestClassParent(testComponent.testClassDependency());
 
         testClassParent.call();
     }
